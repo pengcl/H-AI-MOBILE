@@ -1,0 +1,19 @@
+tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: unset;
+
+  &::ng-deep {
+    .am-tabs-content-wrap {
+      display: none;
+    }
+
+    img {
+      display: block;
+      width: 22px;
+      height: 22px;
+    }
+  }
+}

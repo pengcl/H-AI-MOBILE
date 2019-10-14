@@ -1,0 +1,21 @@
+<Steps [direction]="'horizontal'" [current]="step">
+  <Step [title]="'基本信息'"></Step>
+  <Step [title]="'营收情况'"></Step>
+  <Step [title]="'知产认知'"></Step>
+</Steps>
+
+<form [formGroup]="form">
+  <List>
+    <ListItem (onClick)="showPicker('comprehend',data)"
+              [extra]="form.get('comprehend').value ? form.get('comprehend').value : '请选择'"
+              [arrow]="'horizontal'">
+      是否了解知识产权
+    </ListItem>
+    <TextareaItem [rows]="3" formControlName="remark" [placeholder]="'若有其他关于企业的详细情况可在此处记录，以便我们更好地服务客户。'"></TextareaItem>
+  </List>
+</form>
+
+<div class="btns-group">
+  <a (click)="prev()" class="btn-secondary">上一步</a>
+  <a (click)="next()" class="btn-primary">提交</a>
+</div>

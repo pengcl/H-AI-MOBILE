@@ -1,0 +1,10 @@
+<TabBar
+  [barTintColor]="'white'"
+  [tintColor]="'#108ee9'"
+  [activeTab]="tabIndex"
+  [unselectedTintColor]="'#888888'"
+  [tabBarPosition]="'bottom'"
+  (onPress)="press($event)">
+  <TabBarItem [title]="'企业列表'" [key]="1" [icon]="'/assets/images/icons/list.png'" [selectedIcon]="'/assets/images/icons/list-curr.png'"></TabBarItem>
+  <TabBarItem [title]="'华海微信二维码'" [key]="2" [icon]="'/assets/images/icons/code.png'" [selectedIcon]="'/assets/images/icons/code-curr.png'"></TabBarItem>
+</TabBar>

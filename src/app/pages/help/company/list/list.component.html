@@ -1,0 +1,22 @@
+<SearchBar [placeholder]="'Search'" [maxLength]="8"></SearchBar>
+
+
+<PullToRefresh
+  [direction]="'up'"
+  (onRefresh)="loadMore($event)"
+  *ngIf="data"
+>
+  <List *ngFor="let item of data.list" [className]="'my-list'">
+    <ListItem multipleLine [arrow]="'horizontal'" [extra]="'10:30'">
+      {{item.company}}
+      <Brief><span>{{item.industry}}</span></Brief>
+      <Brief><span>{{item.ageLimit}}</span><span>{{item.employees}}</span><span>{{item.revenue2018}}</span></Brief>
+      <Brief><span>{{item.comprehend}}</span></Brief>
+    </ListItem>
+  </List>
+</PullToRefresh>
+
+<ng-template #loading>
+  <Icon type="loading"></Icon>
+</ng-template>
+<app-footer></app-footer>

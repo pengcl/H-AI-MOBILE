@@ -1,0 +1,28 @@
+<Steps [direction]="'horizontal'" [current]="step">
+  <Step [title]="'基本信息'"></Step>
+  <Step [title]="'营收情况'"></Step>
+  <Step [title]="'知产认知'"></Step>
+</Steps>
+
+<form [formGroup]="form">
+  <div>
+    <InputItem formControlName="company" [error]="form.get('company').invalid && isSubmit" [type]="'text'"
+               [clear]="true"
+               [placeholder]="form.get('company').invalid ? '请正确输入的企业名称！' : '请填写企业完整名称'"
+               [content]="'企业名称'"></InputItem>
+    <InputItem formControlName="industry" [error]="form.get('industry').invalid && isSubmit" [type]="'text'"
+               [clear]="true"
+               [placeholder]="form.get('company').invalid ? '请正确输入企业所属行业！' : '请填写企业所属行业'"
+               [content]="'所属行业'"></InputItem>
+    <InputItem formControlName="name" [error]="form.get('name').invalid && isSubmit" [type]="'text'" [clear]="true"
+               [placeholder]="form.get('company').invalid ? '请正确输入企业联系人！' : '请填写企业联系人姓名'"
+               [content]="'联系人'"></InputItem>
+    <InputItem formControlName="mobile" [error]="form.get('mobile').invalid && isSubmit" [type]="'text'" [clear]="true"
+               [placeholder]="form.get('company').invalid ? '请正确输入企业联系人电话！' : '请填写企业联系人电话'"
+               [content]="'联系电话'"></InputItem>
+  </div>
+</form>
+
+<div class="btns-group">
+  <a (click)="next()" class="btn-primary" [ngClass]="{'disabled':form.invalid}">下一步</a>
+</div>
