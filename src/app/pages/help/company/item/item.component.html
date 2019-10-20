@@ -1,0 +1,49 @@
+<div *ngIf="data" class="weui-form-preview">
+  <div class="weui-form-preview__hd" style="text-align: left">
+    <label class="weui-form-preview__label" style="float: none;">{{data.company}}</label>
+  </div>
+  <div class="weui-form-preview__bd">
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label">所属行业</label>
+      <span class="weui-form-preview__value">{{data.industry}}</span>
+    </div>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label">联系人</label>
+      <span class="weui-form-preview__value">{{data.name}}</span>
+    </div>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label">联系电话</label>
+      <span class="weui-form-preview__value">{{data.mobile}}</span>
+    </div>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label">企业规模</label>
+      <span class="weui-form-preview__value">{{data.employees}}</span>
+    </div>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label">2016年营收</label>
+      <span class="weui-form-preview__value">{{data.revenue2016}}</span>
+    </div>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label">2017年营收</label>
+      <span class="weui-form-preview__value">{{data.revenue2017}}</span>
+    </div>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label">2018年营收</label>
+      <span class="weui-form-preview__value">{{data.revenue2018}}</span>
+    </div>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label">知产情况</label>
+      <span class="weui-form-preview__value">{{data.comprehend}}</span>
+    </div>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label">其他情况</label>
+      <span class="weui-form-preview__value">{{data.remark}}</span>
+    </div>
+  </div>
+  <div class="weui-form-preview__ft">
+    <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">方案</a>
+    <a [routerLink]="['/help/company/log',id]" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">修改记录</a>
+    <a [routerLink]="['/help/company/edit/step0',id]" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">修改</a>
+    <a (click)="delete()" class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">删除</a>
+  </div>
+</div>

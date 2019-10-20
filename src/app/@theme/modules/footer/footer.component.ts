@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -7,13 +8,17 @@ import {Component, Input} from '@angular/core';
 })
 export class FooterComponent {
   @Input() show = true;
-  tabIndex = 0;
+  @Input() index = 0;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   press(e) {
-    console.log(e);
-    this.tabIndex = e.index;
+    this.index = e.index;
+    if (this.index === 0) {
+      this.router.navigate(['/help/company/list']);
+    } else {
+      this.router.navigate(['qr']);
+    }
   }
 }

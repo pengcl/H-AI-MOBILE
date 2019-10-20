@@ -6,23 +6,46 @@
 
 <form [formGroup]="form">
   <div>
-    <InputItem formControlName="company" [error]="form.get('company').invalid && isSubmit" [type]="'text'"
-               [clear]="true"
-               [placeholder]="form.get('company').invalid ? '请正确输入的企业名称！' : '请填写企业完整名称'"
-               [content]="'企业名称'"></InputItem>
-    <InputItem formControlName="industry" [error]="form.get('industry').invalid && isSubmit" [type]="'text'"
-               [clear]="true"
-               [placeholder]="form.get('company').invalid ? '请正确输入企业所属行业！' : '请填写企业所属行业'"
-               [content]="'所属行业'"></InputItem>
-    <InputItem formControlName="name" [error]="form.get('name').invalid && isSubmit" [type]="'text'" [clear]="true"
-               [placeholder]="form.get('company').invalid ? '请正确输入企业联系人！' : '请填写企业联系人姓名'"
-               [content]="'联系人'"></InputItem>
-    <InputItem formControlName="mobile" [error]="form.get('mobile').invalid && isSubmit" [type]="'text'" [clear]="true"
-               [placeholder]="form.get('company').invalid ? '请正确输入企业联系人电话！' : '请填写企业联系人电话'"
-               [content]="'联系电话'"></InputItem>
+    <List>
+      <InputItem formControlName="company" [error]="form.get('company').invalid && isSubmit" [type]="'text'"
+                 [clear]="true"
+                 [placeholder]="form.get('company').invalid ? '请正确输入的企业名称！' : '请填写企业完整名称'"
+                 [content]="'企业名称'"></InputItem>
+      <InputItem formControlName="industry" [error]="form.get('industry').invalid && isSubmit" [type]="'text'"
+                 [clear]="true"
+                 [placeholder]="form.get('company').invalid ? '请正确输入企业所属行业！' : '请填写企业所属行业'"
+                 [content]="'所属行业'"></InputItem>
+      <InputItem formControlName="name" [error]="form.get('name').invalid && isSubmit" [type]="'text'" [clear]="true"
+                 [placeholder]="form.get('company').invalid ? '请正确输入企业联系人！' : '请填写企业联系人姓名'"
+                 [content]="'联系人'"></InputItem>
+      <InputItem formControlName="mobile" [error]="form.get('mobile').invalid && isSubmit" [type]="'text'" [clear]="true"
+                 [placeholder]="form.get('company').invalid ? '请正确输入企业联系人电话！' : '请填写企业联系人电话'"
+                 [content]="'联系电话'"></InputItem>
+    </List>
+    <p>注：带“<em>*</em>”为必填内容</p>
+    <List *ngIf="id !== '0'">
+      <ListItem (onClick)="showPicker('employees',employeeData)" [extra]="form.get('employees').value ? form.get('employees').value : '请选择企业在职人数范围'" [arrow]="'horizontal'">
+        当前企业人员规模
+      </ListItem>
+      <ListItem (onClick)="showPicker('revenue2016',revenueData)" [extra]="form.get('revenue2016').value ? form.get('revenue2016').value : '请选择企业的年收入范围'" [arrow]="'horizontal'">
+        2016年营收范围
+      </ListItem>
+      <ListItem (onClick)="showPicker('revenue2017',revenueData)" [extra]="form.get('revenue2017').value ? form.get('revenue2017').value : '请选择企业的年收入范围'" [arrow]="'horizontal'">
+        2017年营收范围
+      </ListItem>
+      <ListItem (onClick)="showPicker('revenue2018',revenueData)" [extra]="form.get('revenue2018').value ? form.get('revenue2018').value : '请选择企业的年收入范围'" [arrow]="'horizontal'">
+        2018年营收范围
+      </ListItem>
+      <ListItem (onClick)="showPicker('comprehend',data)"
+                [extra]="form.get('comprehend').value ? form.get('comprehend').value : '请选择'"
+                [arrow]="'horizontal'">
+        是否了解知识产权
+      </ListItem>
+      <TextareaItem [rows]="3" formControlName="remark" [placeholder]="'若有其他关于企业的详细情况可在此处记录，以便我们更好地服务客户。'"></TextareaItem>
+    </List>
   </div>
 </form>
 
 <div class="btns-group">
-  <a (click)="next()" class="btn-primary" [ngClass]="{'disabled':form.invalid}">下一步</a>
+  <a (click)="next()" class="btn-primary" [ngClass]="{'disabled':form.invalid}">{{id === '0' ? '下一步' : '确认修改'}}</a>
 </div>

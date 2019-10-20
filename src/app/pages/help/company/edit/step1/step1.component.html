@@ -5,28 +5,28 @@
 </Steps>
 
 <form [formGroup]="form">
-  <div>
-    <List>
-      <ListItem (onClick)="showPicker('employees',employeeData)" [extra]="form.get('employees').value ? form.get('employees').value : '请选择企业在职人数范围'" [arrow]="'horizontal'">
-        当前企业人员规模
-      </ListItem>
-    </List>
-    <List>
-      <ListItem (onClick)="showPicker('revenue2016',revenueData)" [extra]="form.get('revenue2016').value ? form.get('revenue2016').value : '请选择企业的年收入范围'" [arrow]="'horizontal'">
-        2016年营收范围
-      </ListItem>
-    </List>
-    <List>
-      <ListItem (onClick)="showPicker('revenue2017',revenueData)" [extra]="form.get('revenue2017').value ? form.get('revenue2017').value : '请选择企业的年收入范围'" [arrow]="'horizontal'">
-        2017年营收范围
-      </ListItem>
-    </List>
-    <List>
-      <ListItem (onClick)="showPicker('revenue2018',revenueData)" [extra]="form.get('revenue2018').value ? form.get('revenue2018').value : '请选择企业的年收入范围'" [arrow]="'horizontal'">
-        2018年营收范围
-      </ListItem>
-    </List>
-  </div>
+  <List>
+    <ListItem (onClick)="showPicker('employees',employeeData)"
+              [extra]="form.get('employees').value ? form.get('employees').value : '请选择企业在职人数范围'"
+              [arrow]="'horizontal'">
+      当前企业人员规模
+    </ListItem>
+    <ListItem (onClick)="showPicker('revenue2016',revenueData)"
+              [extra]="form.get('revenue2016').value ? form.get('revenue2016').value : '请选择企业的年收入范围'"
+              [arrow]="'horizontal'">
+      2016年营收范围
+    </ListItem>
+    <ListItem (onClick)="showPicker('revenue2017',revenueData)"
+              [extra]="form.get('revenue2017').value ? form.get('revenue2017').value : '请选择企业的年收入范围'"
+              [arrow]="'horizontal'">
+      2017年营收范围
+    </ListItem>
+    <ListItem (onClick)="showPicker('revenue2018',revenueData)"
+              [extra]="form.get('revenue2018').value ? form.get('revenue2018').value : '请选择企业的年收入范围'"
+              [arrow]="'horizontal'">
+      2018年营收范围
+    </ListItem>
+  </List>
 </form>
 
 <div class="btns-group">

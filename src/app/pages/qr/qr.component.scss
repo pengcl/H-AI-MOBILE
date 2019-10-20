@@ -1,0 +1,22 @@
+.qr-content {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translate3d(0, -60%, 0);
+
+  .qr-code {
+    width: 60%;
+    margin: 0 auto;
+
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  p {
+    text-align: center;
+    font-size: 0.16rem;
+    margin-top: 0.15rem;
+  }
+}

@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {IndexComponent} from './pages/index/index.component';
+import {QrComponent} from './pages/qr/qr.component';
 
 const routes: Routes = [
   {
@@ -9,6 +10,10 @@ const routes: Routes = [
   {
     path: 'index',
     component: IndexComponent
+  },
+  {
+    path: 'qr',
+    component: QrComponent
   },
   {
     path: 'help',
