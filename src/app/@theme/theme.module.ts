@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {MatFormFieldModule, MatStepperModule} from '@angular/material';
 import {NgZorroAntdMobileModule} from 'ng-zorro-antd-mobile';
-
+import {SwiperModule} from 'ngx-swiper-wrapper';
 import {COMPONENTS, DIRECTIVES, PIPES} from './index';
 
 import {FooterModule} from './modules/footer/footer.module';
@@ -20,6 +20,7 @@ import {FooterModule} from './modules/footer/footer.module';
     MatFormFieldModule,
     MatStepperModule,
     NgZorroAntdMobileModule,
+    SwiperModule,
     FooterModule.forRoot()
   ],
   exports: [
@@ -31,6 +32,7 @@ import {FooterModule} from './modules/footer/footer.module';
     MatFormFieldModule,
     MatStepperModule,
     NgZorroAntdMobileModule,
+    SwiperModule,
     FooterModule,
     ...DIRECTIVES,
     ...COMPONENTS,

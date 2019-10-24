@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastService, ModalService} from 'ng-zorro-antd-mobile';
 import {HelpService} from '../../help.service';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-help-company-item',
@@ -10,7 +11,7 @@ import {HelpService} from '../../help.service';
 })
 
 export class HelpCompanyItemComponent implements OnInit {
-  id = this.route.snapshot.params.id;
+  id;
   data;
 
   constructor(private route: ActivatedRoute,
@@ -21,25 +22,24 @@ export class HelpCompanyItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.helpSvc.get(this.id).subscribe(res => {
-      this.data = res;
-      console.log(this.data);
+    this.route.paramMap.pipe(map(params => this.id = params.get('id'))).subscribe(id => {
+      this.helpSvc.get(this.id).subscribe(res => {
+        this.data = res;
+      });
     });
   }
 
   delete() {
     this.toastSvc.loading('删除中...', 0);
     this.helpSvc.delete(this.id).subscribe(res => {
-      if (res) {
-        this.toastSvc.hide();
-        this.dialogSvc.alert('', '删除成功！', [
-          {
-            text: '我知道了', onPress: () => {
-              this.router.navigate(['/help/company/list']);
-            }
+      this.toastSvc.hide();
+      this.dialogSvc.alert('', '删除成功！', [
+        {
+          text: '我知道了', onPress: () => {
+            this.router.navigate(['/help/company/list']);
           }
-        ]);
-      }
+        }
+      ]);
     });
   }
 }

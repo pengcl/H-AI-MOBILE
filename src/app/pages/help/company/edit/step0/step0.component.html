@@ -6,9 +6,11 @@
 
 <form [formGroup]="form">
   <div>
-    <List>
-      <InputItem formControlName="company" [error]="form.get('company').invalid && isSubmit" [type]="'text'"
+    <List className="required">
+      <InputItem formControlName="company" [clear]="false" [error]="(form.get('company').invalid && form.get('company').dirty) || sameCompany" [type]="'text'"
                  [clear]="true"
+                 [extra]="sameCompany ? '已有同名企业，可点击修改' : ''"
+                 (onExtraClick)="extraClick()"
                  [placeholder]="form.get('company').invalid ? '请正确输入的企业名称！' : '请填写企业完整名称'"
                  [content]="'企业名称'"></InputItem>
       <InputItem formControlName="industry" [error]="form.get('industry').invalid && isSubmit" [type]="'text'"
@@ -19,10 +21,11 @@
                  [placeholder]="form.get('company').invalid ? '请正确输入企业联系人！' : '请填写企业联系人姓名'"
                  [content]="'联系人'"></InputItem>
       <InputItem formControlName="mobile" [error]="form.get('mobile').invalid && isSubmit" [type]="'text'" [clear]="true"
-                 [placeholder]="form.get('company').invalid ? '请正确输入企业联系人电话！' : '请填写企业联系人电话'"
+                 [placeholder]="form.get('company').invalid ? '请正确输入企业联系人电话！' : '请填写企业联系人电话（建议添加手机号码）'"
                  [content]="'联系电话'"></InputItem>
     </List>
     <p>注：带“<em>*</em>”为必填内容</p>
+    <p>全部必填内容完成后才可进入下一步。</p>
     <List *ngIf="id !== '0'">
       <ListItem (onClick)="showPicker('employees',employeeData)" [extra]="form.get('employees').value ? form.get('employees').value : '请选择企业在职人数范围'" [arrow]="'horizontal'">
         当前企业人员规模
@@ -47,5 +50,5 @@
 </form>
 
 <div class="btns-group">
-  <a (click)="next()" class="btn-primary" [ngClass]="{'disabled':form.invalid}">{{id === '0' ? '下一步' : '确认修改'}}</a>
+  <a (click)="next()" class="btn-primary" [ngClass]="{'disabled':form.invalid || sameCompany}">{{id === '0' ? '下一步' : '确认修改'}}</a>
 </div>

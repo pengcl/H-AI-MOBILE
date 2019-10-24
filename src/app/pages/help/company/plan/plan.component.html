@@ -1,0 +1,17 @@
+<PullToRefresh
+  [direction]="'up'"
+  (onRefresh)="loadMore($event)"
+  *ngIf="data"
+>
+  <List *ngFor="let item of data" [className]="'my-list'">
+    <ListItem (click)="onClick()" [routerLink]="['/help/company/item',item.id]" multipleLine [arrow]="'horizontal'" [extra]="''">
+      {{item.planName}}
+      <Brief><span>{{item.annualFunds}}</span>，<span>{{item.scale}}</span>，<span>{{item.lastYearIncome}}</span></Brief>
+      <Brief><span>{{item.knowledgeCognition}}</span></Brief>
+    </ListItem>
+  </List>
+</PullToRefresh>
+
+<ng-template #loading>
+  <Icon type="loading"></Icon>
+</ng-template>

@@ -1,6 +1,38 @@
+@import "../../../../../../sass/variables";
+
 form {
   margin-bottom: 0.6rem;
 }
+
 p {
   margin: 0.05rem 0.15rem 0.1rem;
+}
+
+::ng-deep .am-list.required {
+  .am-input-label {
+    &:before {
+      content: '*';
+      color: $color-primary;
+    }
+  }
+
+  .am-list-item {
+    overflow: visible;
+    .am-list-line {
+      overflow: visible;
+      .am-input-extra {
+        position: absolute;
+        white-space: nowrap;
+        top: -9px;
+        right: 5px;
+        font-size: 12px;
+        background-color: $color-primary;
+        color: $color-empty;
+        line-height: 1;
+        padding: 3px 7px;
+        border-radius: 9px;
+        z-index: 999;
+      }
+    }
+  }
 }

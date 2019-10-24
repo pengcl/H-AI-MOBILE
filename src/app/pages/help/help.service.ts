@@ -4,15 +4,22 @@ import {Observable} from 'rxjs';
 import {mergeMap as observableMargeMap} from 'rxjs/operators';
 
 import {resultProcess, formData} from '../../utils/utils';
+import {Validators} from '@angular/forms';
 
 @Injectable({providedIn: 'root'})
 export class HelpService {
   constructor(@Inject('PREFIX_URL') private PREFIX_URL, private http: HttpClient) {
   }
 
-  get(id?): Observable<any> {
-    const url = id ? this.PREFIX_URL + 'getAssCust' + '&id=' + id : this.PREFIX_URL + 'getAssCustList';
-    return this.http.get(url).pipe(observableMargeMap((res: any) => {
+  list(page, params): Observable<any> {
+    return this.http.post(this.PREFIX_URL + 'getAssCustList' + '&page=' + page, formData(params))
+      .pipe(observableMargeMap((res: any) => {
+        return this.processResult(res);
+      }));
+  }
+
+  get(id): Observable<any> {
+    return this.http.get(this.PREFIX_URL + 'getAssCust' + '&id=' + id).pipe(observableMargeMap((res: any) => {
       return this.processResult(res);
     }));
   }
@@ -29,14 +36,27 @@ export class HelpService {
     }));
   }
 
+  plan(id, page?): Observable<any> {
+    return this.http.get(this.PREFIX_URL + 'getPlanList' + '&id=' + id + '&page=' + (page ? page : '1'))
+      .pipe(observableMargeMap((res: any) => {
+        return this.processResult(res);
+      }));
+  }
+
   delete(id): Observable<any> {
     return this.http.post(this.PREFIX_URL + 'delAssCust', formData({id: id})).pipe(observableMargeMap((res: any) => {
       return this.processResult(res);
     }));
   }
 
-  log(id): Observable<any> {
-    return this.http.get(this.PREFIX_URL + 'getAssCustLogList' + '&id=' + id).pipe(observableMargeMap((res: any) => {
+  validatorName(company): Observable<any> {
+    return this.http.post(this.PREFIX_URL + 'findByCompName', formData({company: company})).pipe(observableMargeMap((res: any) => {
+      return this.processResult(res);
+    }));
+  }
+
+  log(id, page): Observable<any> {
+    return this.http.get(this.PREFIX_URL + 'getAssCustLogList' + '&id=' + id + '&page=' + page).pipe(observableMargeMap((res: any) => {
       return this.processResult(res);
     }));
   }

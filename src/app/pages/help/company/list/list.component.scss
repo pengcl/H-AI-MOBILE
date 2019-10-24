@@ -5,6 +5,51 @@ searchBar {
   width: 100%;
   z-index: 999;
 }
+
 pulltorefresh {
-  padding: 44px 0 10px;
+  padding: 0 0 60px;
+}
+
+
+::ng-deep {
+  .swiper-wrapper {
+    margin-top: 44px;
+    .swiper-slide {
+      width: auto !important;
+      font-size: 0.14rem;
+      margin: 0.15rem 0.1rem;
+      padding: 0.06rem 0;
+      line-height: 1;
+      &.curr {
+        padding: 0.06rem 0.1rem;
+        border-radius: 0.13rem;
+        background: #F26549;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.add {
+  position: fixed;
+  z-index: 999;
+  right: 10px;
+  bottom: 70px;
+  background-color: rgba(16, 142, 233, 0.8);
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 0.3rem;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+  i {
+    font-size: 0.24rem;
+    font-weight: bold;
+    line-height: 1;
+    display: block;
+    margin-top: 0.1rem;
+  }
+  p {
+    font-size: 0.12rem;
+  }
 }

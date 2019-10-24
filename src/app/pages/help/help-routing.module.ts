@@ -6,6 +6,7 @@ import {HelpCompanyEditStep0Component} from './company/edit/step0/step0.componen
 import {HelpCompanyEditStep1Component} from './company/edit/step1/step1.component';
 import {HelpCompanyEditStep2Component} from './company/edit/step2/step2.component';
 import {HelpCompanyLogComponent} from './company/log/log.component';
+import {HelpCompanyPlanComponent} from './company/plan/plan.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'company/log/:id',
     component: HelpCompanyLogComponent
+  },
+  {
+    path: 'company/plan/:id',
+    component: HelpCompanyPlanComponent
   }
 ];
 

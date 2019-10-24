@@ -41,7 +41,7 @@
     </div>
   </div>
   <div class="weui-form-preview__ft">
-    <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">方案</a>
+    <a [routerLink]="['/help/company/plan',id]" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">方案</a>
     <a [routerLink]="['/help/company/log',id]" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">修改记录</a>
     <a [routerLink]="['/help/company/edit/step0',id]" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">修改</a>
     <a (click)="delete()" class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">删除</a>
