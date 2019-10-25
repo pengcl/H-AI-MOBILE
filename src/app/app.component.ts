@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {StorageService} from './@core/utils/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MOBILE';
+
+  constructor(private storageSvc: StorageService) {
+    storageSvc.remove('companyForm');
+  }
 }

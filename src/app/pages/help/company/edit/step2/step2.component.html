@@ -5,12 +5,13 @@
 </Steps>
 
 <form [formGroup]="form">
-  <List>
+  <List [renderHeader]="'是否了解知识产权'">
     <ListItem (onClick)="showPicker('comprehend',data)"
-              [extra]="form.get('comprehend').value ? form.get('comprehend').value : '请选择'"
               [arrow]="'horizontal'">
-      是否了解知识产权
+      {{form.get('comprehend').value ? form.get('comprehend').value : '请选择'}}
     </ListItem>
+  </List>
+  <List [renderHeader]="'其他情况'">
     <TextareaItem [rows]="3" formControlName="remark" [placeholder]="'若有其他关于企业的详细情况可在此处记录，以便我们更好地服务客户。'"></TextareaItem>
   </List>
 </form>

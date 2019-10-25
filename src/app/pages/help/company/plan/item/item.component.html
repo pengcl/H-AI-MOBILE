@@ -1,0 +1,10 @@
+<div #scrollable class="content-scrollable">
+  <i (click)="back()" class="icons icon-close-round-fill"></i>
+  <div class="pdf">
+    <canvas id="the-canvas"></canvas>
+  </div>
+</div>
+<div class="btns-group">
+  <a (click)="onPrevPage()" class="btn-secondary">上一页</a>
+  <a (click)="onNextPage()" class="btn-primary">下一页</a>
+</div>

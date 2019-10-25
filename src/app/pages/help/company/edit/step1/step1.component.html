@@ -5,26 +5,24 @@
 </Steps>
 
 <form [formGroup]="form">
-  <List>
-    <ListItem (onClick)="showPicker('employees',employeeData)"
-              [extra]="form.get('employees').value ? form.get('employees').value : '请选择企业在职人数范围'"
-              [arrow]="'horizontal'">
-      当前企业人员规模
+  <List [renderHeader]="'当前企业人员规模'">
+    <ListItem (onClick)="showPicker('employees',employeeData)" [arrow]="'horizontal'">
+      {{form.get('employees').value ? form.get('employees').value : '请选择企业在职人数范围'}}
     </ListItem>
-    <ListItem (onClick)="showPicker('revenue2016',revenueData)"
-              [extra]="form.get('revenue2016').value ? form.get('revenue2016').value : '请选择企业的年收入范围'"
-              [arrow]="'horizontal'">
-      2016年营收范围
+  </List>
+  <List [renderHeader]="'2016年营收范围'">
+    <ListItem (onClick)="showPicker('revenue2016',revenueData)" [arrow]="'horizontal'">
+      {{form.get('revenue2016').value ? form.get('revenue2016').value : '请选择企业的年收入范围'}}
     </ListItem>
-    <ListItem (onClick)="showPicker('revenue2017',revenueData)"
-              [extra]="form.get('revenue2017').value ? form.get('revenue2017').value : '请选择企业的年收入范围'"
-              [arrow]="'horizontal'">
-      2017年营收范围
+  </List>
+  <List [renderHeader]="'2017年营收范围'">
+    <ListItem (onClick)="showPicker('revenue2017',revenueData)" [arrow]="'horizontal'">
+      {{form.get('revenue2017').value ? form.get('revenue2017').value : '请选择企业的年收入范围'}}
     </ListItem>
-    <ListItem (onClick)="showPicker('revenue2018',revenueData)"
-              [extra]="form.get('revenue2018').value ? form.get('revenue2018').value : '请选择企业的年收入范围'"
-              [arrow]="'horizontal'">
-      2018年营收范围
+  </List>
+  <List [renderHeader]="'2018年营收范围'">
+    <ListItem (onClick)="showPicker('revenue2018',revenueData)" [arrow]="'horizontal'">
+      {{form.get('revenue2018').value ? form.get('revenue2018').value : '请选择企业的年收入范围'}}
     </ListItem>
   </List>
 </form>

@@ -1,0 +1,68 @@
+@import "../../../../../sass/variables";
+:host {
+  background-color: #f8f8f8;
+}
+
+.am-list {
+  margin: 0.15rem;
+  border-radius: 4px;
+  overflow: hidden;
+
+  &.list {
+    ::ng-deep {
+      .am-list-body {
+        &:before, &:after {
+          display: none;
+        }
+      }
+
+      .am-list-item .am-list-line {
+        .am-list-content {
+          flex: 0.4;
+        }
+
+        .am-list-extra {
+          flex: 1;
+          white-space: unset;
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  &.buttons {
+    ::ng-deep {
+      .am-list-body {
+        &:before, &:after {
+          display: none;
+        }
+      }
+      .am-list-item {
+        &.delete {
+          .am-list-line {
+            .am-list-content {
+              color: $color-primary;
+            }
+          }
+        }
+        .am-list-line {
+          &:after {
+            right: 15px;
+            width: auto;
+          }
+          .am-list-content {
+            flex: 1;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+.icons.icon-call {
+  color: green;
+  float: right;
+  font-size: 22px;
+  line-height: 1;
+}

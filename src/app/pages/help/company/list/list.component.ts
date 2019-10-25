@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
+import {StorageService} from '../../../../@core/utils/storage.service';
 import {HelpService} from '../../help.service';
 import {ToastService, ModalService, PickerService} from 'ng-zorro-antd-mobile';
 
@@ -25,10 +26,40 @@ export class HelpCompanyListComponent implements OnInit {
     pagination: false,
     autoplay: false
   };
-  limitData = ['0-1年', '1-2年', '2-3年', '3年以上'];
-  comprehendData = ['完全不了解', '听说过，但不了解', '了解，知道商标、专利和版权', '了解，公司已具备相关知识产权', '非常了解，并希望通过知识产权增值'];
-  employeesData = ['50人以下', '101-200人', '201-500人', '501-2000人', '2000人以上'];
-  revenueData = ['未开业', '0-200万', '201-500万', '501-1000万', '1001-5000', '5001-1亿', '1-5亿', '5亿以上'];
+  limitData = [
+    {label: '不限', value: ''},
+    {label: '0-1年', value: '0-1年'},
+    {label: '1-2年', value: '1-2年'},
+    {label: '2-3年', value: '2-3年'},
+    {label: '3年以上', value: '3年以上'}
+  ];
+  comprehendData = [
+    {label: '不限', value: ''},
+    {label: '完全不了解', value: '完全不了解'},
+    {label: '不了解', value: '听说过，但不了解'},
+    {label: '了解但不具备', value: '了解，知道商标、专利和版权'},
+    {label: '了解且具备', value: '了解，公司已具备相关知识产权'},
+    {label: '非常了解', value: '非常了解，并希望通过知识产权增值'}
+  ];
+  employeesData = [
+    {label: '不限', value: ''},
+    {label: '50人以下', value: '50人以下'},
+    {label: '100人', value: '51-100人'},
+    {label: '200人', value: '101-200人'},
+    {label: '500人', value: '201-500人'},
+    {label: '2000人', value: '501-2000人'},
+    {label: '2000人以上', value: '2000人以上'}
+  ];
+  revenueData = [
+    {label: '不限', value: ''},
+    {label: '200万', value: '0-200万'},
+    {label: '500万', value: '201-500万'},
+    {label: '1000万', value: '501-1000万'},
+    {label: '5000万', value: '1001-5000'},
+    {label: '1亿', value: '5001-1亿'},
+    {label: '5亿', value: '1-5亿'},
+    {label: '5亿以上', value: '5亿以上'}
+  ];
 
   params = {
     company: '',
@@ -40,6 +71,7 @@ export class HelpCompanyListComponent implements OnInit {
 
   constructor(private router: Router,
               private titleSvc: Title,
+              private storageSvc: StorageService,
               private pickerSvc: PickerService,
               private helpSvc: HelpService) {
     titleSvc.setTitle('签单助手');
@@ -57,10 +89,10 @@ export class HelpCompanyListComponent implements OnInit {
   }
 
   showPicker(target, optionData) {
-    console.log(target, optionData);
     this.pickerSvc.showPicker({data: optionData}, res => {
+      console.log(res);
       this.page = 1;
-      this.params[target] = res[0];
+      this.params[target] = res[0].value;
       this.getData();
     });
   }
@@ -75,7 +107,7 @@ export class HelpCompanyListComponent implements OnInit {
   }
 
   add() {
-    console.log('add');
+    this.storageSvc.remove('companyForm');
     this.router.navigate(['/help/company/edit/step0', 0]);
   }
 

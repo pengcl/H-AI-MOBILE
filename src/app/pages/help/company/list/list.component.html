@@ -1,20 +1,31 @@
 <SearchBar [(ngModel)]="params.company" (onChange)="change($event)" [placeholder]="'Search'" [maxLength]="20"></SearchBar>
 <swiper [config]="config" [index]="index" fxFlex="auto">
-  <span (click)="showPicker('ageLimit',limitData)" class="item-box swiper-slide">{{params.ageLimit ? params.ageLimit : '年资不限'}}</span>
-  <span (click)="showPicker('employees',employeesData)" class="item-box swiper-slide">{{params.employees ? params.employees : '人数不限'}}</span>
-  <span (click)="showPicker('revenue',revenueData)" class="item-box swiper-slide">{{params.revenue ? params.revenue : '年收入不限'}}</span>
-  <span (click)="showPicker('comprehend',comprehendData)" class="item-box swiper-slide">{{params.comprehend ? params.comprehend : '知产情况不限'}}</span>
+  <span (click)="showPicker('ageLimit',limitData)" class="item-box swiper-slide">{{params.ageLimit ? (params.ageLimit | label : limitData) : '年资不限'}}</span>
+  <span (click)="showPicker('employees',employeesData)" class="item-box swiper-slide">{{params.employees ? (params.employees | label : employeesData) : '人数不限'}}</span>
+  <span (click)="showPicker('revenue',revenueData)" class="item-box swiper-slide">{{params.revenue ? (params.revenue | label : revenueData) : '年收入不限'}}</span>
+  <span (click)="showPicker('comprehend',comprehendData)" class="item-box swiper-slide">{{params.comprehend ? (params.comprehend | label : comprehendData) : '知产情况不限'}}</span>
 </swiper>
+<Result
+  [img]="img"
+  [title]="'没有查到对应的企业信息'"
+  [buttonText]="'点击添加企业'"
+  (onButtonClick)="add()"
+  *ngIf="data?.length < 1"
+>
+  <ng-template #img>
+    <i class="icons icon-null"></i>
+  </ng-template>
+</Result>
 <PullToRefresh
   [direction]="'up'"
   (onRefresh)="loadMore($event)"
-  *ngIf="data"
+  *ngIf="data?.length > 0"
 >
-  <List *ngFor="let item of data" [className]="'my-list'">
-    <ListItem [routerLink]="['/help/company/item',item.id]" multipleLine [arrow]="'horizontal'" [extra]="">
+  <List [className]="'my-list'">
+    <ListItem *ngFor="let item of data" [routerLink]="['/help/company/item',item.id]" multipleLine [arrow]="'horizontal'" [extra]="">
       {{item.company}}
       <Brief><span>{{item.industry}}</span></Brief>
-      <Brief><span>{{item.ageLimit}}</span><span>{{item.employees}}</span><span>{{item.revenue2018}}</span></Brief>
+      <Brief><span>{{item.ageLimit}}</span>，<span>{{item.employees}}</span>，<span>{{item.revenue2018}}</span></Brief>
       <Brief><span>{{item.comprehend}}</span></Brief>
     </ListItem>
   </List>

@@ -6,44 +6,57 @@
 
 <form [formGroup]="form">
   <div>
-    <List className="required">
+    <List [renderHeader]="'企业名称'" className="required">
       <InputItem formControlName="company" [clear]="false" [error]="(form.get('company').invalid && form.get('company').dirty) || sameCompany" [type]="'text'"
-                 [clear]="true"
-                 [extra]="sameCompany ? '已有同名企业，可点击修改' : ''"
+                 [extra]="form.get('company').invalid && isSubmit ? '请正确输入的企业名称' : (sameCompany ? '已有同名企业，可点击修改' : '')"
                  (onExtraClick)="extraClick()"
-                 [placeholder]="form.get('company').invalid ? '请正确输入的企业名称！' : '请填写企业完整名称'"
-                 [content]="'企业名称'"></InputItem>
-      <InputItem formControlName="industry" [error]="form.get('industry').invalid && isSubmit" [type]="'text'"
-                 [clear]="true"
-                 [placeholder]="form.get('company').invalid ? '请正确输入企业所属行业！' : '请填写企业所属行业'"
-                 [content]="'所属行业'"></InputItem>
-      <InputItem formControlName="name" [error]="form.get('name').invalid && isSubmit" [type]="'text'" [clear]="true"
-                 [placeholder]="form.get('company').invalid ? '请正确输入企业联系人！' : '请填写企业联系人姓名'"
-                 [content]="'联系人'"></InputItem>
-      <InputItem formControlName="mobile" [error]="form.get('mobile').invalid && isSubmit" [type]="'text'" [clear]="true"
-                 [placeholder]="form.get('company').invalid ? '请正确输入企业联系人电话！' : '请填写企业联系人电话（建议添加手机号码）'"
-                 [content]="'联系电话'"></InputItem>
+                 [placeholder]="form.get('company').invalid && form.get('company').dirty ? '请正确输入的企业名称！' : '请填写企业完整名称'"></InputItem>
+    </List>
+    <List [renderHeader]="'所属行业'" className="required">
+      <InputItem formControlName="industry" [clear]="false" [error]="form.get('industry').invalid && form.get('industry').dirty" [type]="'text'"
+                 [extra]="form.get('industry').invalid && isSubmit ? '请正确输入企业所属行业！' : ''"
+                 [placeholder]="'请填写企业所属行业'"></InputItem>
+    </List>
+    <List [renderHeader]="'联系人'" className="required">
+      <InputItem formControlName="name" [clear]="false" [error]="form.get('name').invalid && form.get('name').dirty" [type]="'text'"
+                 [extra]="form.get('name').invalid && isSubmit ? '请正确输入企业联系人！' : ''"
+                 [placeholder]="'请填写企业联系人姓名'"></InputItem>
+    </List>
+    <List [renderHeader]="'联系电话'" className="required">
+      <InputItem formControlName="mobile" [clear]="false" [error]="form.get('mobile').invalid && form.get('mobile').dirty" [type]="'number'"
+                 [extra]="form.get('mobile').invalid && isSubmit ? '请正确输入企业联系人电话！' : ''"
+                 pattern="[0-9]*"
+                 [placeholder]="'请填写企业联系人电话（建议添加手机号码）'"></InputItem>
     </List>
     <p>注：带“<em>*</em>”为必填内容</p>
-    <p>全部必填内容完成后才可进入下一步。</p>
-    <List *ngIf="id !== '0'">
-      <ListItem (onClick)="showPicker('employees',employeeData)" [extra]="form.get('employees').value ? form.get('employees').value : '请选择企业在职人数范围'" [arrow]="'horizontal'">
-        当前企业人员规模
+    <p *ngIf="id === '0'">全部必填内容完成后才可进入下一步。</p>
+    <List [renderHeader]="'当前企业人员规模'" *ngIf="id !== '0'">
+      <ListItem (onClick)="showPicker('employees',employeeData)" [arrow]="'horizontal'">
+        {{form.get('employees').value ? form.get('employees').value : '请选择企业在职人数范围'}}
       </ListItem>
-      <ListItem (onClick)="showPicker('revenue2016',revenueData)" [extra]="form.get('revenue2016').value ? form.get('revenue2016').value : '请选择企业的年收入范围'" [arrow]="'horizontal'">
-        2016年营收范围
+    </List>
+    <List [renderHeader]="'2016年营收范围'" *ngIf="id !== '0'">
+      <ListItem (onClick)="showPicker('revenue2016',revenueData)" [arrow]="'horizontal'">
+        {{form.get('revenue2016').value ? form.get('revenue2016').value : '请选择企业的年收入范围'}}
       </ListItem>
-      <ListItem (onClick)="showPicker('revenue2017',revenueData)" [extra]="form.get('revenue2017').value ? form.get('revenue2017').value : '请选择企业的年收入范围'" [arrow]="'horizontal'">
-        2017年营收范围
+    </List>
+    <List [renderHeader]="'2017年营收范围'" *ngIf="id !== '0'">
+      <ListItem (onClick)="showPicker('revenue2017',revenueData)" [arrow]="'horizontal'">
+        {{form.get('revenue2017').value ? form.get('revenue2017').value : '请选择企业的年收入范围'}}
       </ListItem>
-      <ListItem (onClick)="showPicker('revenue2018',revenueData)" [extra]="form.get('revenue2018').value ? form.get('revenue2018').value : '请选择企业的年收入范围'" [arrow]="'horizontal'">
-        2018年营收范围
+    </List>
+    <List [renderHeader]="'2018年营收范围'" *ngIf="id !== '0'">
+      <ListItem (onClick)="showPicker('revenue2018',revenueData)" [arrow]="'horizontal'">
+        {{form.get('revenue2018').value ? form.get('revenue2018').value : '请选择企业的年收入范围'}}
       </ListItem>
+    </List>
+    <List [renderHeader]="'是否了解知识产权'" *ngIf="id !== '0'">
       <ListItem (onClick)="showPicker('comprehend',data)"
-                [extra]="form.get('comprehend').value ? form.get('comprehend').value : '请选择'"
                 [arrow]="'horizontal'">
-        是否了解知识产权
+        {{form.get('comprehend').value ? form.get('comprehend').value : '请选择'}}
       </ListItem>
+    </List>
+    <List [renderHeader]="'其他情况'" *ngIf="id !== '0'">
       <TextareaItem [rows]="3" formControlName="remark" [placeholder]="'若有其他关于企业的详细情况可在此处记录，以便我们更好地服务客户。'"></TextareaItem>
     </List>
   </div>

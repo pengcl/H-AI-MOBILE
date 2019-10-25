@@ -2,37 +2,53 @@
 
 form {
   margin-bottom: 0.6rem;
+  ::ng-deep .am-list {
+    &.required {
+      .am-list-header {
+        &:before {
+          content: '*';
+          color: $color-primary;
+        }
+      }
+    }
+
+    .am-list-body {
+      background-color: transparent;
+
+      &:before, &:after {
+        display: none;
+      }
+    }
+
+    .am-list-item {
+      overflow: visible;
+      margin: 0 15px;
+      border: 1px solid #ededed !important;
+
+      .am-list-line {
+        overflow: visible;
+
+        .am-input-extra {
+          position: absolute;
+          white-space: nowrap;
+          top: -29px;
+          right: 5px;
+          font-size: 12px;
+          color: $color-primary;
+          line-height: 1;
+          padding: 3px 7px;
+          border-radius: 9px;
+          z-index: 999;
+        }
+      }
+
+      .am-input-error-extra {
+        display: none;
+      }
+    }
+  }
 }
 
 p {
   margin: 0.05rem 0.15rem 0.1rem;
-}
-
-::ng-deep .am-list.required {
-  .am-input-label {
-    &:before {
-      content: '*';
-      color: $color-primary;
-    }
-  }
-
-  .am-list-item {
-    overflow: visible;
-    .am-list-line {
-      overflow: visible;
-      .am-input-extra {
-        position: absolute;
-        white-space: nowrap;
-        top: -9px;
-        right: 5px;
-        font-size: 12px;
-        background-color: $color-primary;
-        color: $color-empty;
-        line-height: 1;
-        padding: 3px 7px;
-        border-radius: 9px;
-        z-index: 999;
-      }
-    }
-  }
 }

@@ -1,0 +1,17 @@
+form{
+  ::ng-deep {
+    .am-list-body {
+      background-color: transparent;
+
+      &:before, &:after {
+        display: none !important;
+      }
+
+      .am-list-item {
+        margin: 0 15px;
+        border: 1px solid #ededed !important;
+        overflow: visible;
+      }
+    }
+  }
+}

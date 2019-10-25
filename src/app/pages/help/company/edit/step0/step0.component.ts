@@ -20,15 +20,16 @@ export class HelpCompanyEditStep0Component implements OnInit {
   step = 0;
   formValue = JSON.parse(this.storageSvc.get('companyForm'));
   isSubmit = false;
-  data = ['完全不了解', '听说过，但不了解', '了解，知道商标、专利和版权', '了解，公司已具备相关知识产权', '非常了解，并希望通过知识产权增值'];
-  employeeData = ['50人以下', '101-200人', '201-500人', '501-2000人', '2000人以上'];
-  revenueData = ['未开业', '0-200万', '201-500万', '501-1000万', '1001-5000', '5001-1亿', '1-5亿', '5亿以上'];
+  data = ['请选择', '完全不了解', '听说过，但不了解', '了解，知道商标、专利和版权', '了解，公司已具备相关知识产权', '非常了解，并希望通过知识产权增值'];
+  employeeData = ['请选择企业的在职人数范围', '50人以下', '101-200人', '201-500人', '501-2000人', '2000人以上'];
+  revenueData = ['请选择企业的年收入范围', '未开业', '0-200万', '201-500万', '501-1000万', '1001-5000', '5001-1亿', '1-5亿', '5亿以上'];
   sameCompany: any = false;
   form: FormGroup = new FormGroup({
-    company: new FormControl('', [Validators.required, Validators.pattern(/.*[\u4e00-\u9fa5]+.*$/)]),
-    industry: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required]),
-    mobile: new FormControl('', [Validators.required, Validators.pattern(/[0 - 9] */), Validators.minLength(11), Validators.maxLength(11)]),
+    id: new FormControl('', [Validators.required]),
+    company: new FormControl('', [Validators.required, Validators.pattern(/^[\u4e00-\u9fa5]+$/)]),
+    industry: new FormControl('', [Validators.required, Validators.pattern(/^[\u4e00-\u9fa5]+$/)]),
+    name: new FormControl('', [Validators.required, Validators.pattern(/^[\u4e00-\u9fa5]+$/)]),
+    mobile: new FormControl('', [Validators.required, Validators.maxLength(32)]),
     employees: new FormControl('', []),
     revenue2016: new FormControl('', []),
     revenue2017: new FormControl('', []),
@@ -55,7 +56,7 @@ export class HelpCompanyEditStep0Component implements OnInit {
       });
 
       this.form.get('company').valueChanges.pipe(
-        filter(text => text.length > 2),
+        filter(text => text.length > 1),
         debounceTime(1000),
         distinctUntilChanged()).subscribe(company => {
         this.helpSvc.validatorName(company).subscribe(res => {
@@ -69,6 +70,7 @@ export class HelpCompanyEditStep0Component implements OnInit {
       });
 
       if (this.id !== '0') {
+        this.form.get('id').enable();
         this.helpSvc.get(this.id).subscribe(res => {
           if (res) {
             for (const key in this.form.value) {
@@ -79,6 +81,7 @@ export class HelpCompanyEditStep0Component implements OnInit {
           }
         });
       } else {
+        this.form.get('id').disable();
         if (this.formValue) {
           for (const key in this.formValue) {
             if (this.formValue[key]) {
@@ -92,8 +95,8 @@ export class HelpCompanyEditStep0Component implements OnInit {
 
   showPicker(target, optionData) {
     this.pickerSvc.showPicker({data: optionData}, res => {
-      console.log(res);
       this.form.get(target).setValue(res[0]);
+      this.form.get(target).setValue(res[0] === '请选择企业的在职人数范围' || res[0] === '请选择企业的年收入范围' || res[0] === '请选择' ? '' : res[0]);
     });
   }
 
@@ -108,15 +111,14 @@ export class HelpCompanyEditStep0Component implements OnInit {
     }
     if (this.id !== '0') {
       this.toastSvc.loading('提交中...', 0);
-      this.helpSvc.research(this.form.value).subscribe(res => {
-        console.log(res);
+      this.helpSvc.update(this.form.value).subscribe(res => {
+        this.toastSvc.hide();
         if (res) {
           this.storageSvc.remove('companyForm');
-          this.toastSvc.hide();
           this.dialogSvc.alert('', '您已成功提交！', [
             {
               text: '我知道了', onPress: () => {
-                this.router.navigate(['/help/company/list']);
+                this.router.navigate(['/help/company/item', res.id]);
               }
             }
           ]);

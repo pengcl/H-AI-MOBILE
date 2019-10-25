@@ -7,7 +7,9 @@ import {
   RmbPipe,
   FormatSrcPipe,
   DistancePipe,
-  DetailPipe
+  DetailPipe,
+  LabelPipe,
+  HtmlPipe
 } from './pipes.pipe';
 
 export const PIPES_DECLARATIONS = [
@@ -19,5 +21,7 @@ export const PIPES_DECLARATIONS = [
   RmbPipe,
   FormatSrcPipe,
   DistancePipe,
-  DetailPipe
+  DetailPipe,
+  LabelPipe,
+  HtmlPipe
 ];

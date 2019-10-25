@@ -1,40 +1,31 @@
-<div *ngIf="data" class="weui-form-preview">
+<List *ngIf="data" [className]="'list'">
+  <ListItem [extra]="data.company">企业名称</ListItem>
+  <ListItem [extra]="data.industry">所属行业</ListItem>
+  <ListItem [extra]="data.name">联系人</ListItem>
+  <ListItem [extra]="extra">联系电话</ListItem>
+  <ListItem [extra]="data.employees">企业规模</ListItem>
+  <ListItem [extra]="data.revenue2016">2016年营收</ListItem>
+  <ListItem [extra]="data.revenue2017">2017年营收</ListItem>
+  <ListItem [extra]="data.revenue2018">2018年营收</ListItem>
+  <ListItem [extra]="data.comprehend">知产情况</ListItem>
+  <ListItem [extra]="'这是一条其他情况这是一条其他情况这是一条其他情况这是一条其他情况这是一条其他情况这是一条其他情况这是一条其他情况这是一条其他情况这是一条其他情况这是一条其他情况'">其他情况</ListItem>
+</List>
+<ng-template #extra>
+  {{data.mobile}}
+  <a href="tel:{{data.mobile}}"><i class="icons icon-call"></i></a>
+</ng-template>
+<List [className]="'buttons'">
+  <ListItem [routerLink]="['/help/company/plan/list',id]" [queryParams]="{type:'edit'}">查看培育方案</ListItem>
+  <ListItem [routerLink]="['/help/company/log',id]">查看修改记录</ListItem>
+  <ListItem [routerLink]="['/help/company/edit/step0',id]">修改企业信息</ListItem>
+  <ListItem className="delete" (click)="delete()">删除企业信息</ListItem>
+</List>
+
+<!--<div *ngIf="data" class="weui-form-preview">
   <div class="weui-form-preview__hd" style="text-align: left">
     <label class="weui-form-preview__label" style="float: none;">{{data.company}}</label>
   </div>
   <div class="weui-form-preview__bd">
-    <div class="weui-form-preview__item">
-      <label class="weui-form-preview__label">所属行业</label>
-      <span class="weui-form-preview__value">{{data.industry}}</span>
-    </div>
-    <div class="weui-form-preview__item">
-      <label class="weui-form-preview__label">联系人</label>
-      <span class="weui-form-preview__value">{{data.name}}</span>
-    </div>
-    <div class="weui-form-preview__item">
-      <label class="weui-form-preview__label">联系电话</label>
-      <span class="weui-form-preview__value">{{data.mobile}}</span>
-    </div>
-    <div class="weui-form-preview__item">
-      <label class="weui-form-preview__label">企业规模</label>
-      <span class="weui-form-preview__value">{{data.employees}}</span>
-    </div>
-    <div class="weui-form-preview__item">
-      <label class="weui-form-preview__label">2016年营收</label>
-      <span class="weui-form-preview__value">{{data.revenue2016}}</span>
-    </div>
-    <div class="weui-form-preview__item">
-      <label class="weui-form-preview__label">2017年营收</label>
-      <span class="weui-form-preview__value">{{data.revenue2017}}</span>
-    </div>
-    <div class="weui-form-preview__item">
-      <label class="weui-form-preview__label">2018年营收</label>
-      <span class="weui-form-preview__value">{{data.revenue2018}}</span>
-    </div>
-    <div class="weui-form-preview__item">
-      <label class="weui-form-preview__label">知产情况</label>
-      <span class="weui-form-preview__value">{{data.comprehend}}</span>
-    </div>
     <div class="weui-form-preview__item">
       <label class="weui-form-preview__label">其他情况</label>
       <span class="weui-form-preview__value">{{data.remark}}</span>
@@ -46,4 +37,4 @@
     <a [routerLink]="['/help/company/edit/step0',id]" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">修改</a>
     <a (click)="delete()" class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">删除</a>
   </div>
-</div>
+</div>-->

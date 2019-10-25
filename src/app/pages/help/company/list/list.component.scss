@@ -6,26 +6,75 @@ searchBar {
   z-index: 999;
 }
 
-pulltorefresh {
-  padding: 0 0 60px;
+swiper {
+  position: absolute;
+  width: 100%;
+  top: 44px;
+  z-index: 1;
+  background-color: #f8f8f8;
 }
 
+pulltorefresh {
+  padding: 100px 0 60px;
+}
 
+.my-list {
+  ::ng-deep {
+    .am-list-body {
+      background-color: transparent;
+
+      &:before, &:after {
+        display: none !important;
+      }
+
+      .am-list-item {
+        border-radius: 4px;
+        margin: 15px;
+
+        .am-list-line {
+          &:after {
+            display: none !important;
+          }
+        }
+      }
+    }
+  }
+}
 ::ng-deep {
   .swiper-wrapper {
-    margin-top: 44px;
     .swiper-slide {
       width: auto !important;
       font-size: 0.14rem;
       margin: 0.15rem 0.1rem;
       padding: 0.06rem 0;
       line-height: 1;
+
       &.curr {
         padding: 0.06rem 0.1rem;
         border-radius: 0.13rem;
         background: #F26549;
         color: #fff;
       }
+    }
+  }
+
+  .am-result {
+    .am-result-pic {
+      width: 100px;
+      height: 100px;
+
+      .icons {
+        font-size: 100px;
+        color: #999;
+        display: block;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+      }
+    }
+
+    .am-result-button {
+      color: #108ee9;
     }
   }
 }
@@ -42,6 +91,7 @@ pulltorefresh {
   text-align: center;
   color: #fff;
   overflow: hidden;
+
   i {
     font-size: 0.24rem;
     font-weight: bold;
@@ -49,6 +99,7 @@ pulltorefresh {
     display: block;
     margin-top: 0.1rem;
   }
+
   p {
     font-size: 0.12rem;
   }

@@ -1,0 +1,71 @@
+pulltorefresh {
+  padding: 10px 0 10px;
+}
+.my-list {
+  ::ng-deep {
+    .am-list-body {
+      background-color: transparent;
+
+      &:before, &:after {
+        display: none !important;
+      }
+
+      .am-list-item {
+        border-radius: 4px;
+        margin: 15px;
+
+        .am-list-line {
+          &:after {
+            display: none !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.pdf {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  display: none;
+  canvas {
+    margin-top: 50px;
+  }
+  &.show {
+    display: block;
+  }
+}
+
+.content-scrollable {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  background: #f8f8f8;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  &.has-nav {
+    padding-top: 0.45rem;
+  }
+  &.has-footer {
+    &:after {
+      content: "";
+      display: block;
+      height: 53px;
+    }
+  }
+  .weui-panel:first-child {
+    &:before {
+      display: none;
+    }
+  }
+}

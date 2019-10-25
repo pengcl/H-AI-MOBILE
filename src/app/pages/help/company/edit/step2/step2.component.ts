@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
 import {PickerService, ToastService, ModalService} from 'ng-zorro-antd-mobile';
 import {StorageService} from '../../../../../@core/utils/storage.service';
 import {HelpService} from '../../../help.service';
@@ -15,7 +16,7 @@ export class HelpCompanyEditStep2Component implements OnInit {
   id = this.route.snapshot.params.id;
   step = 2;
   formValue = JSON.parse(this.storageSvc.get('companyForm'));
-  data = ['完全不了解', '听说过，但不了解', '了解，知道商标、专利和版权', '了解，公司已具备相关知识产权', '非常了解，并希望通过知识产权增值'];
+  data = ['请选择', '完全不了解', '听说过，但不了解', '了解，知道商标、专利和版权', '了解，公司已具备相关知识产权', '非常了解，并希望通过知识产权增值'];
   form: FormGroup = new FormGroup({
     company: new FormControl('', [Validators.required]),
     industry: new FormControl('', [Validators.required]),
@@ -31,11 +32,13 @@ export class HelpCompanyEditStep2Component implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private titleSvc: Title,
               private storageSvc: StorageService,
               private toastSvc: ToastService,
               private dialogSvc: ModalService,
               private pickerSvc: PickerService,
               private helpSvc: HelpService) {
+    titleSvc.setTitle('企业信息录入');
   }
 
   ngOnInit() {
@@ -54,7 +57,7 @@ export class HelpCompanyEditStep2Component implements OnInit {
 
   showPicker(target, optionData) {
     this.pickerSvc.showPicker({data: optionData}, res => {
-      this.form.get(target).setValue(res[0]);
+      this.form.get(target).setValue(res[0] === '请选择' ? '' : res[0]);
     });
   }
 
@@ -68,14 +71,13 @@ export class HelpCompanyEditStep2Component implements OnInit {
     }
     this.toastSvc.loading('提交中...', 0);
     this.helpSvc.research(this.form.value).subscribe(res => {
-      console.log(res);
+      this.toastSvc.hide();
       if (res) {
         this.storageSvc.remove('companyForm');
-        this.toastSvc.hide();
         this.dialogSvc.alert('', '您已成功提交！', [
           {
             text: '我知道了', onPress: () => {
-              this.router.navigate(['/help/company/list']);
+              this.router.navigate(['/help/company/plan/list', res.id], {queryParams: {type: 'add'}});
             }
           }
         ]);

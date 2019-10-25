@@ -18,7 +18,10 @@ import {PAGES} from './pages';
     BrowserAnimationsModule,
     ThemeModule.forRoot()
   ],
-  providers: [INTERCEPTORS, {provide: 'PREFIX_URL', useValue: '/api/wisp/intf/call?action='}],
+  providers: [INTERCEPTORS,
+    {provide: 'PREFIX_URL', useValue: '/api/wisp/intf/call?action='},
+    {provide: 'FILE_PREFIX_URL', useValue: '/api/wisp/admin/fileupload/previewFile?id='}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

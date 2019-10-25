@@ -16,7 +16,7 @@
     <tr *ngFor="let item of data">
       <td class="date">{{item.createTime | date : 'yyyy-MM-dd'}}<br>{{item.createTime | date : 'HH:mm:ss'}}</td>
       <td class="mobile">{{item.createByName}}</td>
-      <td class="rmb">{{item.content}}</td>
+      <td class="rmb" [innerHTML]="item.content | html"></td>
     </tr>
     </tbody>
   </table>

@@ -36,8 +36,15 @@ export class HelpService {
     }));
   }
 
-  plan(id, page?): Observable<any> {
+  plans(id, page?): Observable<any> {
     return this.http.get(this.PREFIX_URL + 'getPlanList' + '&id=' + id + '&page=' + (page ? page : '1'))
+      .pipe(observableMargeMap((res: any) => {
+        return this.processResult(res);
+      }));
+  }
+
+  plan(id): Observable<any> {
+    return this.http.get(this.PREFIX_URL + 'getPlan' + '&id=' + id)
       .pipe(observableMargeMap((res: any) => {
         return this.processResult(res);
       }));

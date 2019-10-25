@@ -158,3 +158,34 @@ export class DetailPipe implements PipeTransform {
     return html.replace(/img src="/g, 'img src="/api');
   }
 }
+
+@Pipe({
+  name: 'label',
+  pure: false
+})
+// <em class="money"><i class="rmb">￥</i><span>{{item.price}}</span><i class="decimal">.00</i></em>
+@Injectable()
+export class LabelPipe implements PipeTransform {
+  transform(value, data): any {
+    if (!value) {
+      return value;
+    }
+    const index = getIndex(data, 'value', value);
+    return data[index].label;
+  }
+}
+
+@Pipe({
+  name: 'html',
+  pure: false
+})
+// <em class="money"><i class="rmb">￥</i><span>{{item.price}}</span><i class="decimal">.00</i></em>
+@Injectable()
+export class HtmlPipe implements PipeTransform {
+  transform(value): any {
+    if (!value) {
+      return value;
+    }
+    return value.replace(/\n/g, '<br/>');
+  }
+}
